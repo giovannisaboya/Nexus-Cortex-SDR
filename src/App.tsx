@@ -211,6 +211,7 @@ export default function App() {
   const [isTtsEnabled, setIsTtsEnabled] = useState(false);
   const [isVoiceMode, setIsVoiceMode] = useState(false);
   const [isVideoMode, setIsVideoMode] = useState(false);
+  const [callError, setCallError] = useState<string | null>(null);
   const [isRecording, setIsRecording] = useState(false);
   const [recordingTime, setRecordingTime] = useState(0);
   const [isTranscribing, setIsTranscribing] = useState(false);
@@ -570,9 +571,18 @@ export default function App() {
       
       setLiveSession(session);
       await startAudioCapture(session, mode === 'video');
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to start call:", error);
       stopCall();
+      const msg = error?.message || String(error);
+      if (msg.includes("API_KEY") || msg.includes("401") || msg.includes("403")) {
+        setCallError("Chave de API inválida. Verifique nas configurações.");
+      } else if (msg.includes("404") || msg.includes("not found")) {
+        setCallError("Modelo de chamada não disponível nesta conta.");
+      } else {
+        setCallError("Não foi possível iniciar a chamada. Verifique sua conexão e a chave de API.");
+      }
+      setTimeout(() => setCallError(null), 5000);
     }
   };
 
@@ -1827,6 +1837,21 @@ export default function App() {
                 </button>
               </div>
             </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Call Error Toast */}
+      <AnimatePresence>
+        {callError && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed top-4 left-1/2 -translate-x-1/2 z-[100] bg-red-600 text-white px-5 py-3 rounded-2xl shadow-xl text-sm font-medium flex items-center gap-2 max-w-xs text-center"
+          >
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            {callError}
           </motion.div>
         )}
       </AnimatePresence>

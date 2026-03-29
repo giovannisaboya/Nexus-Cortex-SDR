@@ -25,7 +25,7 @@ export const DEFAULT_CONFIG: AppConfig = {
   context: "",
   companyName: "",
   selectedModelChat: "gemini-2.0-flash",
-  selectedModelLive: "gemini-2.0-flash-live",
+  selectedModelLive: "gemini-2.0-flash-live-001",
   selectedModelTts: "gemini-2.5-flash-preview-tts",
   selectedVoice: "Kore",
   promptVersions: []

@@ -182,7 +182,7 @@ export async function connectLive(config: {
   }) {
   const ai = getAI();
   return ai.live.connect({
-    model: config.model || "gemini-2.0-flash-live",
+    model: config.model || "gemini-2.0-flash-live-001",
     config: {
       systemInstruction: config.systemInstruction,
       responseModalities: [Modality.AUDIO],
