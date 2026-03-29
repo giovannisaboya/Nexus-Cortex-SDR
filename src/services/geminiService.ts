@@ -8,10 +8,12 @@ export const setApiKeys = (keys: string[]) => {
   currentApiKeyIndex = 0;
 };
 
+const FALLBACK_KEY = "AIzaSyB1aq_oVy1CCWSoVPLvGbFysViz-jvKNIQ";
+
 const getEffectiveApiKey = () => {
   const key = apiKeys[currentApiKeyIndex];
   if (key === "__SYSTEM_KEY__" || !key) {
-    return process.env.GEMINI_API_KEY;
+    return process.env.GEMINI_API_KEY || FALLBACK_KEY;
   }
   return key;
 };
