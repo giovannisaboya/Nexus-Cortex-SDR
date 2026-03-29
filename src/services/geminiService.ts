@@ -186,7 +186,7 @@ export async function connectLive(config: {
   }) {
   const ai = getAI();
   return ai.live.connect({
-    model: config.model || "gemini-2.0-flash-live-exp",
+    model: config.model || "gemini-3.1-flash-live-preview",
     config: {
       systemInstruction: config.systemInstruction,
       responseModalities: [Modality.AUDIO],
@@ -216,7 +216,7 @@ export async function transcribeAudio(base64Data: string, mimeType: string, retr
   const ai = getAI();
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3-flash-preview",
       contents: {
         parts: [
           {
@@ -252,7 +252,7 @@ export async function generateSummary(history: any[], retryCount: number = 0): P
   try {
     const ai = getAI();
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
+      model: "gemini-3-flash-preview",
       contents: [
         ...history,
         {

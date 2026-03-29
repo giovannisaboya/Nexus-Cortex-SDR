@@ -227,6 +227,7 @@ export default function App() {
   const [testVoiceText, setTestVoiceText] = useState("Olá, eu sou a Julia. Como posso te ajudar hoje?");
   const [isTestingVoice, setIsTestingVoice] = useState(false);
   const isMutedRef = useRef(false);
+  const callEverConnectedRef = useRef(false);
 
   useEffect(() => {
     isMutedRef.current = isMuted;
@@ -488,7 +489,8 @@ export default function App() {
     setIsIncomingCall(false);
     setIsCallProposed(false);
     setIsCallConnected(false);
-    
+    callEverConnectedRef.current = false;
+
     try {
       // Initialize AudioContext immediately for playback
       const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)({ sampleRate: 24000 });
@@ -510,20 +512,33 @@ export default function App() {
         systemInstruction: systemPrompt,
         onOpen: () => {
           console.log("Call connected");
+          callEverConnectedRef.current = true;
           setIsCallConnected(true);
-          // Pequeno delay para garantir que a sessão está pronta
           setTimeout(() => {
-            const initialGreeting = mode === 'video' 
-              ? "Oi! Que bom te ver por aqui. Como posso te ajudar hoje?" 
+            const initialGreeting = mode === 'video'
+              ? "Oi! Que bom te ver por aqui. Como posso te ajudar hoje?"
               : "Olá! É um prazer falar com você. Como posso te ajudar hoje?";
             session.sendRealtimeInput({ text: initialGreeting });
           }, 1000);
         },
         onClose: () => {
+          if (!callEverConnectedRef.current) {
+            setCallError("Não foi possível conectar a chamada. Verifique sua chave de API e tente novamente.");
+            setTimeout(() => setCallError(null), 6000);
+          }
           stopCall();
         },
         onError: (err) => {
           console.error("Call error:", err);
+          const errMsg = err?.message || err?.status || String(err);
+          if (errMsg.includes("API_KEY") || errMsg.includes("401") || errMsg.includes("403")) {
+            setCallError("Chave de API inválida. Verifique nas configurações.");
+          } else if (errMsg.includes("404") || errMsg.includes("not found") || errMsg.includes("model")) {
+            setCallError("Modelo de chamada não disponível nesta conta.");
+          } else {
+            setCallError("Erro na chamada: " + errMsg.slice(0, 80));
+          }
+          setTimeout(() => setCallError(null), 6000);
           stopCall();
         },
         onMessage: (msg) => {
@@ -778,6 +793,7 @@ export default function App() {
     setIsVoiceMode(false);
     setIsVideoMode(false);
     setIsIncomingCall(false);
+    setIsCallConnected(false);
   };
 
   const playTts = async (text: string, messageId?: string) => {
