@@ -8,7 +8,7 @@ export const setApiKeys = (keys: string[]) => {
   currentApiKeyIndex = 0;
 };
 
-const FALLBACK_KEY = "AIzaSyB1aq_oVy1CCWSoVPLvGbFysViz-jvKNIQ";
+const FALLBACK_KEY = "AIzaSyD-OeFg4k2125ODCpN5dNZpm3bgi-Ok6N0";
 
 const getEffectiveApiKey = () => {
   const key = apiKeys[currentApiKeyIndex];
