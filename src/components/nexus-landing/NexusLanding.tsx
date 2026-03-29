@@ -446,10 +446,9 @@ export function NexusLanding({ onStart }: { onStart: () => void }) {
               <span className="font-semibold tracking-tight text-foreground">NEXUS CORTEX</span>
               <span className="text-muted-foreground">SDR</span>
             </div>
-            <div className="flex items-center gap-2">
-              <span>Powered by</span>
-              <span className="font-semibold text-foreground">Legio Nexus</span>
-            </div>
+            <span className="text-[11px] text-muted-foreground/40">
+              powered by TRAE with Gemini
+            </span>
           </footer>
         </div>
       </section>

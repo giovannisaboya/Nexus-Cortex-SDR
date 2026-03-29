@@ -124,6 +124,12 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
               </motion.div>
             </AnimatePresence>
           </main>
+
+          <footer className="border-t border-border/60 py-3 text-center">
+            <span className="text-[11px] text-muted-foreground/40">
+              powered by TRAE with Gemini
+            </span>
+          </footer>
         </div>
       </div>
     </div>

@@ -28,8 +28,15 @@ export default function Home() {
 
   if (view === "onboarding") {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-background p-4">
-        <NexusOnboarding onComplete={() => setView("dashboard")} />
+      <div className="flex min-h-screen flex-col bg-background">
+        <div className="flex flex-1 items-center justify-center p-4">
+          <NexusOnboarding onComplete={() => setView("dashboard")} />
+        </div>
+        <footer className="py-3 text-center">
+          <span className="text-[11px] text-muted-foreground/40">
+            powered by TRAE with Gemini
+          </span>
+        </footer>
       </div>
     );
   }
