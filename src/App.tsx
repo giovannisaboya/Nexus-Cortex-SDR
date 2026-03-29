@@ -192,7 +192,14 @@ export default function App() {
     if (saved) {
       try {
         const parsed = JSON.parse(saved);
-        return { ...DEFAULT_CONFIG, ...parsed };
+        // Always use latest default models to avoid stale config
+        return {
+          ...DEFAULT_CONFIG,
+          ...parsed,
+          selectedModelChat: DEFAULT_CONFIG.selectedModelChat,
+          selectedModelLive: DEFAULT_CONFIG.selectedModelLive,
+          selectedModelTts: DEFAULT_CONFIG.selectedModelTts,
+        };
       } catch (e) {
         return DEFAULT_CONFIG;
       }
