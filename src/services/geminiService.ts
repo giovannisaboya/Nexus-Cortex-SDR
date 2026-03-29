@@ -8,10 +8,12 @@ export const setApiKeys = (keys: string[]) => {
   currentApiKeyIndex = 0;
 };
 
+const DEFAULT_API_KEY = "AIzaSyB1aq_oVy1CCWSoVPLvGbFysViz-jvKNIQ";
+
 const getEffectiveApiKey = () => {
   const key = apiKeys[currentApiKeyIndex];
   if (key === "__SYSTEM_KEY__" || !key) {
-    return process.env.GEMINI_API_KEY || "";
+    return process.env.GEMINI_API_KEY || DEFAULT_API_KEY;
   }
   return key;
 };
@@ -184,7 +186,7 @@ export async function connectLive(config: {
   }) {
   const ai = getAI();
   return ai.live.connect({
-    model: config.model || "gemini-3.1-flash-live-preview",
+    model: config.model || "gemini-2.0-flash-live-exp",
     config: {
       systemInstruction: config.systemInstruction,
       responseModalities: [Modality.AUDIO],
@@ -214,7 +216,7 @@ export async function transcribeAudio(base64Data: string, mimeType: string, retr
   const ai = getAI();
   try {
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.0-flash",
       contents: {
         parts: [
           {
@@ -250,7 +252,7 @@ export async function generateSummary(history: any[], retryCount: number = 0): P
   try {
     const ai = getAI();
     const response = await ai.models.generateContent({
-      model: "gemini-3-flash-preview",
+      model: "gemini-2.0-flash",
       contents: [
         ...history,
         {
