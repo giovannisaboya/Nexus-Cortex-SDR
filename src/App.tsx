@@ -1559,14 +1559,8 @@ export default function App() {
               </div>
             </div>
             <div className="flex items-center gap-4 text-[#54656F]">
-              <div className="relative group">
-                <button className="p-2 rounded-full opacity-40 cursor-default" title="Chamada de Vídeo (em breve)"><Video className="w-5 h-5" /></button>
-                <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-[#667781] whitespace-nowrap hidden group-hover:block">Em breve</span>
-              </div>
-              <div className="relative group">
-                <button className="p-2 rounded-full opacity-40 cursor-default" title="Chamada de Voz (em breve)"><Phone className="w-5 h-5" /></button>
-                <span className="absolute -bottom-5 left-1/2 -translate-x-1/2 text-[9px] font-bold text-[#667781] whitespace-nowrap hidden group-hover:block">Em breve</span>
-              </div>
+              <button onClick={() => startCall('video')} className="p-2 hover:bg-[#D9DBDF] rounded-full transition-colors" title="Chamada de Vídeo"><Video className="w-5 h-5" /></button>
+              <button onClick={() => startCall('voice')} className="p-2 hover:bg-[#D9DBDF] rounded-full transition-colors" title="Chamada de Voz"><Phone className="w-5 h-5" /></button>
               <div className="w-[1px] h-6 bg-[#D1D7DB] mx-1" />
               <button 
                 onClick={handleEndConversation} 
@@ -1702,15 +1696,13 @@ export default function App() {
                         >
                           <div className="p-2 space-y-1">
                             <button
-                              className="w-full flex items-center gap-3 p-3 rounded-xl text-[#54656F] opacity-40 cursor-default"
+                              onClick={() => { setIsAttachmentMenuOpen(false); startCall('video'); }}
+                              className="w-full flex items-center gap-3 p-3 hover:bg-[#F5F6F6] rounded-xl transition-colors text-[#54656F]"
                             >
                               <div className="w-10 h-10 bg-[#D3396D] rounded-full flex items-center justify-center text-white">
                                 <Video className="w-5 h-5" />
                               </div>
-                              <div className="text-left">
-                                <span className="text-sm font-medium block">Câmera / Vídeo</span>
-                                <span className="text-[10px] text-[#667781]">Em breve</span>
-                              </div>
+                              <span className="text-sm font-medium">Câmera / Vídeo</span>
                             </button>
                             <button className="w-full flex items-center gap-3 p-3 hover:bg-[#F5F6F6] rounded-xl transition-colors text-[#54656F]">
                               <div className="w-10 h-10 bg-[#BF59CF] rounded-full flex items-center justify-center text-white">
