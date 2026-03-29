@@ -1,0 +1,9 @@
+{
+  "name": "Julia AI SDR",
+  "description": "Especialista em vendas por IA que atua como SDR consultiva e natural.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "geolocation"
+  ]
+}

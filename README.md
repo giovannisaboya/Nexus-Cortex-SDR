@@ -1,31 +1,20 @@
-# Nexus Cortex SDR
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-Plataforma de Inteligência Artificial para SDRs (Sales Development Representatives). Configure o contexto da sua empresa e tenha um agente especialista vendendo 24/7.
+# Run and deploy your AI Studio app
 
-## Funcionalidades
+This contains everything you need to run your app locally.
 
-- **Landing Page Profissional**: Conversão direta para onboarding.
-- **Onboarding Inteligente**: Setup guiado em 3 passos.
-- **Cortex Dashboard**: Métricas reais e pipeline de leads.
-- **Integração Gemini**: Respostas dinâmicas baseadas no contexto da empresa.
-- **Inbox Integrada**: Chat direto com leads qualificados.
+View your app in AI Studio: https://ai.studio/apps/6bd563ea-fb14-4de4-854a-9a1c21810ae8
 
-## Tecnologias
+## Run Locally
 
-- Next.js 15
-- Tailwind CSS
-- Zustand (Gerenciamento de Estado)
-- Google Generative AI (Gemini)
-- Lucide React (Ícones)
-- Framer Motion (Animações)
+**Prerequisites:**  Node.js
 
-## Instalação
 
-1. Clone o repositório.
-2. Instale as dependências: `npm install`.
-3. Configure sua chave Gemini no arquivo `.env.local`: `GOOGLE_AI_KEY=sua_chave`.
-4. Inicie o servidor: `npm run dev`.
-
-## Licença
-
-Privado - Legio Nexus
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
