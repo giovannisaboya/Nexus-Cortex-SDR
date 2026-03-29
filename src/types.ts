@@ -24,8 +24,8 @@ export const DEFAULT_CONFIG: AppConfig = {
   temperature: 0.7,
   context: "",
   companyName: "",
-  selectedModelChat: "gemini-2.5-flash-preview-04-17",
-  selectedModelLive: "gemini-2.0-flash-live-001",
+  selectedModelChat: "gemini-3.1-pro-preview",
+  selectedModelLive: "gemini-3.1-flash-live-preview",
   selectedModelTts: "gemini-2.5-flash-preview-tts",
   selectedVoice: "Kore",
   promptVersions: []
