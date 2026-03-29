@@ -947,15 +947,18 @@ export default function App() {
       }
 
     } catch (error: any) {
-      console.error("Chat Error:", error);
+      console.error("Chat Error:", error?.message || error);
       const isQuotaError = error?.status === "RESOURCE_EXHAUSTED" || error?.message?.includes("429") || error?.message?.includes("quota");
-      
+      const isAuthError = error?.message?.includes("API_KEY") || error?.message?.includes("401") || error?.message?.includes("403");
+
       setMessages(prev => [...prev, {
         id: Date.now().toString(),
         role: 'assistant',
-        content: isQuotaError 
-          ? "Ops! Minha cota de mensagens foi excedida. Por favor, verifique suas chaves de API nas configurações ou tente novamente em alguns instantes."
-          : "Houve um erro na comunicação. Por favor, tente novamente.",
+        content: isAuthError
+          ? "Chave de API inválida ou não configurada. Verifique nas configurações."
+          : isQuotaError
+          ? "Cota de mensagens excedida. Verifique sua chave de API ou aguarde alguns instantes."
+          : "Não consegui processar agora. Pode repetir?",
         timestamp: new Date()
       }]);
     } finally {

@@ -113,7 +113,6 @@ export async function generateChatResponse(config: {
       config: {
         systemInstruction: config.systemInstruction,
         temperature: config.temperature,
-        tools: [{ googleSearch: {} }],
       }
     });
 
