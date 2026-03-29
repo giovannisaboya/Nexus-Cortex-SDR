@@ -976,7 +976,7 @@ export default function App() {
           ? "Chave de API inválida. Verifique nas configurações."
           : isQuotaError
           ? "Cota excedida. Aguarde alguns instantes."
-          : `Erro: ${errMsg.slice(0, 120)}`,
+          : "Não consegui processar sua mensagem. Tente novamente.",
         timestamp: new Date()
       }]);
     } finally {
@@ -1472,6 +1472,9 @@ export default function App() {
             </div>
           </motion.div>
         </main>
+        <footer className="text-center py-4">
+          <p className="text-[10px] text-[#1A1A1A]/25 tracking-widest uppercase">powered by TRAE with Gemini</p>
+        </footer>
       </div>
     );
   }
@@ -1542,6 +1545,9 @@ export default function App() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="px-4 py-2 border-t border-[#F0F2F5]">
+            <p className="text-[9px] text-[#667781]/50 text-center tracking-widest uppercase">powered by TRAE with Gemini</p>
           </div>
         </aside>
 
